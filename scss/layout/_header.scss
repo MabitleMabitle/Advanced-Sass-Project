@@ -1,0 +1,16 @@
+// header is a grid item of container grid
+.header {
+  grid-column: 1/-1;
+  grid-row: 1/2;
+
+  // making header also a grid container
+  display: grid;
+  grid-template-columns: minmax(10rem, 1fr) repeat(
+      7,
+      minmax(min-content, 16rem)
+    ) minmax(10rem, 1fr);
+  grid-template-rows: repeat(3, min-content);
+  grid-gap: 2rem;
+  //to put it above the  animation
+  z-index: 100;
+}

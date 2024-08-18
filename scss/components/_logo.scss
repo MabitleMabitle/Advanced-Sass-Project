@@ -1,0 +1,11 @@
+.logo {
+  // logo is a grid item of header container
+  grid-column: 1/2;
+  grid-row: 1/2;
+  padding: 1rem;
+
+  &-img {
+    inline-size: 10rem;
+    block-size: 100%;
+  }
+}

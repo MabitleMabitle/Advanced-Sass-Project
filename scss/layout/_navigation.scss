@@ -1,0 +1,52 @@
+// first-nav is the grid item of header container
+.first-nav {
+  grid-column: 7/10;
+  grid-row: 1/2;
+  // bringing our navigation mixin
+  @include navigation;
+  //after above line we can now apply &-classNameExtend which will  as we wrote it in our html as in our mixin scss file which will be still
+  // the same like .first-nav-list
+
+  // xl is 1200px
+  @include response(xl) {
+    // this is the code block that will be applied at this break point
+    // in order to create space between items, change starting line of column from (7/10) to (6/10)
+    grid-column: 6/10;
+  }
+  //lg  is 1000px
+  @include response(lg) {
+    // this is the code block that will be applied at this break point
+    grid-column: 5/10;
+  }
+  //md   is 700px
+  @include response(md) {
+    // this is the code block that will be applied at this break point
+    grid-column: 4/10;
+  }
+  //sm   is 560px
+  @include response(sm) {
+    // this is the code block that will be applied at this break point
+    grid-column: 2/10;
+  }
+}
+
+.second-nav {
+  // second-nav is the grid item of header container
+  grid-column: 3/8;
+  grid-row: 3/4;
+  @include navigation;
+  //after above line we can now apply &-classNameExtend which will  as we wrote it in our html as in our mixin scss file which will be still
+  // the same like .second-nav-list
+
+  //lg  is 1000px
+  @include response(lg) {
+    // this is the code block that will be applied at this break point
+    // from grid-column: 3/8;  to  grid-column: 2/9;
+    grid-column: 2/9;
+  }
+  //md   is 700px
+  @include response(md) {
+    // this is the code block that will be applied at this break point
+    grid-column: 1/-1;
+  }
+}

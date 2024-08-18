@@ -1,0 +1,36 @@
+// base file in general it includes staff like resets style, general css and etc that will be reused again and again
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+html {
+  // by default font-size of html is equal to 16px so we need to decrease it for us to be able to easily work with it 10px/ 16px = .625 * 100
+  font-size: 62.5%;
+
+  // md  is 700px
+  @include response(md) {
+    // this is the code block that will be applied at this break point
+    //  9px(random)/16p(of html)  = 56.25%
+    font-size: 56.25%;
+  }
+  // sm  is 560px
+  @include response(sm) {
+    // this is the code block that will be applied at this break point
+    //  8px(random)/16p(of html)  = 50%
+    font-size: 50%;
+  }
+}
+
+.container {
+  display: grid;
+  grid-template-columns: minmax(6rem, 1fr) repeat(8, minmax(min-content, 16rem)) minmax(
+      6rem,
+      1fr
+    );
+  grid-template-rows: repeat(4, min-content);
+  grid-row-gap: 1.6rem;
+  // evoking our color() function by passing the parameter
+  background-color: color(tertiary);
+}

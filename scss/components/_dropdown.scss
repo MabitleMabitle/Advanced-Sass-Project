@@ -1,0 +1,57 @@
+.dropdown-li {
+  position: relative;
+
+  &::after {
+    // using Icons in a different way from the way use to insert them in our html . the down arrow icon
+    font-family: "Font Awesome 5 Free";
+    content: "\f078";
+    font-weight: bold;
+  }
+
+  // un-hiding it during hover
+  &:hover .dropdown {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+.dropdown {
+  // relatively to .dropdown-li
+  position: absolute;
+  top: 3rem;
+  right: -2.8rem;
+  inline-size: 10rem;
+  // using a default function darken() and also calling our color function inside it
+  background-color: darken(color(tertiary), 5%);
+  @include navigation;
+  //after above line we can now apply &-classNameExtend which will  as we wrote it in our html as in our mixin scss file which will be still
+  // the same like .dropdown-list. ,  &-item ->  .dropdown-item ,  &-link ->  .dropdown-link
+  padding: 1rem;
+  text-align: center;
+  border-radius: 0.2rem;
+
+  // hiding it so that it will only show when we hover over it
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -1.5rem;
+    left: 7.3rem;
+    border-inline-end: 15px solid transparent;
+    border-block-end: 15px solid darken(color(tertiary), 5%);
+    border-inline-start: 15px solid transparent;
+  }
+
+  &-item {
+    margin-block: 0.5rem;
+    margin-inline: 0;
+  }
+
+  &-link {
+    font-weight: 300;
+    font-size: sizes(xs);
+  }
+}

@@ -1,0 +1,149 @@
+// .footer is a grid item of container
+.footer {
+  grid-column: 1/-1;
+  grid-row: 4/5;
+
+  // instead of justify-content:center , imply space around
+  @include flexPosition(space-around);
+  padding-block: 5rem;
+  padding-inline: 0;
+  border-block-start: 0.1rem solid color(primary);
+
+  // lg is 1000px
+  @include response(lg) {
+    // this is the code block that will be applied at this break point
+    flex-wrap: wrap;
+  }
+}
+
+.footer-nav {
+  @include footerList;
+}
+.contact-list {
+  @include footerList;
+}
+
+.contact {
+  // lg is 1000px
+  @include response(lg) {
+    // this is the code block that will be applied at this break point
+    padding-block: 0;
+    padding-inline: 10rem;
+
+    // we need both list to be placed side by side at the top of contact form, in order to
+    // achieve that we have to change value of display ORDER PROPERTY  for contact form, by default
+    // flex items order is 0, it we set this flex item to 1 , it will be the last 1 in order
+    order: 1;
+    margin-block-start: 4rem;
+  }
+
+  &-heading {
+    font-size: sizes(xl);
+    color: color(primary);
+    text-align: center;
+
+    //md   is 700px
+    @include response(md) {
+      // this is the code block that will be applied at this break point
+      font-size: sizes(lg);
+    }
+  }
+  &-paragraph {
+    font-size: sizes(lg);
+    margin-block: 1rem;
+    margin-inline: 0;
+    text-align: center;
+
+    //md   is 700px
+    @include response(md) {
+      // this is the code block that will be applied at this break point
+      font-size: sizes(md);
+    }
+  }
+
+  .inputs-group {
+    display: flex;
+    // to compromise when inputs fields are not shrinking in firefox as they shrinks in chrome
+    justify-content: center;
+    input {
+      padding: 1rem;
+      font-size: sizes(xs);
+      margin-block: 1rem;
+      margin-inline: 0.5rem;
+      border: 0.1rem solid darken(color(primary), 10%);
+      border-radius: 0.3rem;
+      outline: none;
+      transition: border 0.5s;
+
+      // excluding type="submit" when focused on inputs
+      &:focus:not([type="submit"]) {
+        border: 0.1rem solid darken(color(quaternary), 15%);
+      }
+    }
+    &-text {
+      inline-size: 50%;
+    }
+    &-email {
+      width: 60%;
+    }
+    &-btn {
+      inline-size: 40%;
+      color: color(secondary);
+      background-color: lighten(color(primary), 20%);
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: color(primary);
+      }
+    }
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    box-sizing: border-box;
+
+    &-item {
+      list-style: none;
+    }
+    &-link {
+      text-decoration: none;
+      inline-size: 4rem;
+      block-size: 4rem;
+      border: 0.1rem solid color(primary);
+      border-radius: 100%;
+      @include flexPosition;
+
+      // sm is 560px
+      @include response(sm) {
+        // this is the code block that will be applied at this break point
+        inline-size: 3rem;
+        block-size: 3rem;
+      }
+
+      i {
+        font-size: sizes(md);
+        // sm is 560px
+        @include response(sm) {
+          // this is the code block that will be applied at this break point
+          font-size: sizes(sm);
+        }
+      }
+    }
+  }
+}
+
+// applying for each loop like I did in slideshow
+$socialMediaColors: 1 #3b5998, 2 #b31217, 3 #dc4e41, 4 #55acee, 5 #517fa4,
+  6 #0077b5;
+// above are appropriate color for each icon
+
+// we can call variable for our current item $color
+@each $color in $socialMediaColors {
+  // selecting descendant .social-icons-link and updating it while looping
+  .social-icons-item:nth-child(#{nth($color, 1)}) .social-icons-link {
+    color: nth($color, 2);
+    border: 0.1rem solid nth($color, 2);
+  }
+}

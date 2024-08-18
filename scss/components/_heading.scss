@@ -1,0 +1,15 @@
+.heading {
+  // header is a grid item of header container
+  grid-column: 1/-1;
+  grid-row: 2/3;
+  text-align: center;
+
+  &-text {
+    font-family: "Great Vibes", cursive;
+    // evoking our size function and passing in parameters from our map(object)
+    font-size: sizes(xl) * 2;
+    // we can multiply it by 2 to make it big
+    font-weight: lighter;
+    letter-spacing: 0.5rem;
+  }
+}

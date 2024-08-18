@@ -1,0 +1,133 @@
+// slide show is a grid item of container
+.slideshow {
+  grid-column: 1/-1;
+  grid-row: 2/3;
+  position: relative;
+  inline-size: 100%;
+  block-size: 80vh;
+
+  // xl is 1200px
+  @include response(xl) {
+    // this is the code block that will be applied at this break point
+    block-size: 70vh;
+  }
+  // lg is 1000px
+  @include response(lg) {
+    // this is the code block that will be applied at this break point
+    block-size: 60vh;
+  }
+  //md   is 700px
+  @include response(md) {
+    // this is the code block that will be applied at this break point
+    block-size: 50vh;
+  }
+
+  &-slide {
+    // relatively to .slideshow
+    position: absolute;
+    top: 0;
+    left: 0;
+    // inherit from parent element
+    inline-size: inherit;
+    block-size: inherit;
+    //defining animation property we set down there
+    animation: slideshow 20s linear infinite;
+    visibility: hidden;
+    opacity: 0;
+
+    img {
+      // inherit from parent element
+      inline-size: inherit;
+      block-size: inherit;
+      object-fit: cover;
+    }
+  }
+  &-content {
+    // calling color() function
+    background-color: rgba(color(secondary), 0.9);
+    // relatively to .slideshow
+    position: absolute;
+    bottom: 6rem;
+    left: 6rem;
+    right: 6rem;
+    //max-width when it grows, it grows to that width, it will not grow more than that
+    max-width: 40rem;
+    padding: 5rem;
+
+    // lg is 1000px
+    @include response(lg) {
+      // this is the code block that will be applied at this break point
+      padding: 2rem;
+    }
+
+    h2 {
+      // calling sizes() function
+      font-size: sizes(xl) + 1.2rem;
+      color: color(primary);
+    }
+
+    p {
+      margin-block: 1rem;
+      margin-inline: 0;
+      font-size: sizes(sm);
+    }
+  }
+}
+
+//so that all the slide wont display and hide at the same time we need to set for each slide we need different delay time
+// .slideshow-slide:nth-child(1) {
+//   animation-delay: 0s;
+// }
+// .slideshow-slide:nth-child(2) {
+//   animation-delay: 4s;
+// }
+// .slideshow-slide:nth-child(3) {
+//   animation-delay: 8s;
+// }
+// .slideshow-slide:nth-child(4) {
+//   animation-delay: 12s;
+// }
+// .slideshow-slide:nth-child(5) {
+//   animation-delay: 16s;
+// }
+// ABOVE IS SIMPLE BUT NOT BEST WAY TO ACHIEVE , WE CAN ACHIEVE THE SAME RESULT BY WRITING THE CODE IN THE BEST WAY LIKE BELOW
+
+// creating a variable with list, slide 1 with 0s,slide 2 with 4s,slide 3 with 8s, slide 4 with 12s, slide 5 with 16s,.JUST LIKE CREATING AN ARRAY IN JAVASCRIPT
+$animList: 1 0s, 2 4s, 3 8s, 4 12s, 5 16s;
+// looping through that list using for each loop
+// we can call variable for our current item $item
+@each $item in $animList {
+  //so we need to insert proper number of slides for that
+  //  we gonna use interpolation #{} to get first values from those nested list above         $animList: 1 0s, 2 4s, 3 8s, 4 12s, 5 16s;
+  // and also use one of sass built function called nth() which allows us to select specific items from the list, it will have 2 arguments
+  //first one is going to be current item, as for second argument we have to insert 1 which grab the FIRST VALUE item in variable list (array) when iterating through it
+  .slideshow-slide:nth-child(#{nth($item, 1)}) {
+    //incase of animation-delay we need to grab the SECOND VALUE item  in variable list (array) when iterating through it
+    animation-delay: nth($item, 2);
+  }
+}
+
+// setting key frames for our slide animation
+@keyframes slideshow {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+  }
+  2% {
+    visibility: visible;
+    opacity: 1;
+  }
+  // those 2 step above will create a fate-effect
+  18% {
+    visibility: visible;
+    opacity: 1;
+  }
+  20% {
+    visibility: hidden;
+    opacity: 0;
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0;
+  }
+}

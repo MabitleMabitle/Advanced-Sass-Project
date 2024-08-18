@@ -1,0 +1,90 @@
+@mixin navigation {
+  // HERE &- SYMBOL IS NOT LINKED TO MIXIN NAME navigation ABOVE BUT IT IS LINKED TO
+  //THE CLASS NAME  WHICH WE WILL @include  OUR MIXIN, that class name can be either be a going parent&sibling Direction or descendants Directio
+  &-list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    // for align-items: center;  to work we have to define height(inline-size)
+    block-size: 100%;
+  }
+  // remember only the text properties will get inherited
+  &-item {
+    list-style: none;
+  }
+  &-link {
+    color: color(primary);
+    text-decoration: none;
+    // calling our font-size function and passing map property as arguments
+    font-size: sizes(sm);
+    transition: all 0.3s;
+
+    &:hover {
+      // we pass in built function lighten() which make the color light according to the value we pass and  the second argument is the ratio
+      color: lighten(color(primary), 40%);
+    }
+  }
+}
+
+// setting default parameters in our mixin   $justCont: center, $alignItem: center
+@mixin flexPosition($justCont: center, $alignItem: center) {
+  display: flex;
+  justify-content: $justCont;
+  align-items: $alignItem;
+}
+
+@mixin footerList {
+  // HERE &- SYMBOL IS NOT LINKED TO MIXIN NAME navigation ABOVE BUT IT IS LINKED TO
+  //THE CLASS NAME  WHICH WE WILL @include  OUR MIXIN, that class name can be either be a going parent&sibling Direction or descendants Direction
+  &-heading {
+    font-size: sizes(lg);
+    color: color(primary);
+  }
+  &-item {
+    list-style: none;
+    margin-block: 1rem;
+    margin-inline: 0;
+  }
+  &-link {
+    font-size: sizes(xs);
+    text-decoration: none;
+    color: lighten(color(primary), 15%);
+    transition: color 0.2s;
+
+    &:hover {
+      color: lighten(color(secondary), 35%);
+    }
+  }
+}
+
+// instead of writing just usual media query. create @mixin in  which we will define multiple breakpoints  base on some conditions
+@mixin response($breakpoint) {
+  @if ($breakpoint == xl) {
+    // xl is 1200px
+    @media (max-width: 1200px) {
+      @content;
+      // @content allow us to add code block to mixin, so when ever we reach a
+      // break point of 1200px , will call the code that we @included the @mixin
+    }
+  }
+
+  @if ($breakpoint == lg) {
+    // lg  is 1000px
+    @media (max-width: 1000px) {
+      @content;
+    }
+  }
+
+  @if ($breakpoint == md) {
+    // md  is 700px
+    @media (max-width: 700px) {
+      @content;
+    }
+  }
+  @if ($breakpoint == sm) {
+    // sm  is 560px
+    @media (max-width: 560px) {
+      @content;
+    }
+  }
+}

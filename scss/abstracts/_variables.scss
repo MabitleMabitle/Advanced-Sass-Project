@@ -1,0 +1,27 @@
+// map is like an object in javascript if you remember, and we gonna pass the this properties as parameters as we call our function during our project body
+$colors: (
+  primary: #333,
+  secondary: #ffe,
+  tertiary: #f2f0f1,
+  quaternary: #f5b149,
+);
+// then we create a function that will  call our map(object)
+@function color($color-name) {
+  // using map to return  our object and passing name of map we created, the parameter of our function
+  @return map-get($colors, $color-name);
+}
+
+// map is like an object in javascript if you remember, and we gonna pass the this properties as parameters as we call our function during our project body
+$font-sizes: (
+  // xl is extraLarge, large,medium,small,extra-small
+  xl: 3rem,
+  lg: 2.5rem,
+  md: 2rem,
+  sm: 1.8rem,
+  xs: 1.6rem
+);
+// then we create a function that will  call our map(object)
+@function sizes($size) {
+  // using map to return  our object and passing name of map we created, the parameter of our function
+  @return map-get($font-sizes, $size);
+}

@@ -1,0 +1,139 @@
+// .products is a grid item of container grid
+.products {
+  grid-column: 1/-1;
+  grid-row: 3/4;
+
+  &-heading {
+    margin-block: 5rem;
+    margin-inline: 0;
+
+    &-text {
+      text-align: center;
+      font-size: sizes(lg) + 2rem;
+      font-weight: 300;
+      color: color(primary);
+    }
+  }
+  &-wrapper {
+    // we need to center it , so we dont need to pass in any parameters as they are default parameters     flexPosition($justCont: center, $alignItem: center)
+    @include flexPosition;
+  }
+}
+
+.product {
+  position: relative;
+
+  // un-hiding description during hover
+  &:hover .product-description {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &:hover .product-img {
+    opacity: 0.5;
+  }
+
+  &-img {
+    inline-size: 100%;
+    background-color: inherit;
+    transition: all 1s 0.5s;
+  }
+  &-description {
+    // relative to .product
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    // using one of sass builtin function called () which allows to make color transparent and it takes two arguments which  is color and ratio of it
+    background-color: transparentize(color(secondary), 0.4);
+    padding: 2rem;
+    border: 0.1rem solid color(primary);
+    border-radius: 0.5rem;
+    color: color(primary);
+    text-align: center;
+
+    // hiding the description so that when we hover it get Un-hidden
+    opacity: 0;
+    visibility: hidden;
+    transition: all 1s 0.5s;
+
+    // lg is 1000px
+    @include response(lg) {
+      // this is the code block that will be applied at this break point
+      padding: 1rem;
+    }
+    // sm is 560px
+    @include response(sm) {
+      // this is the code block that will be applied at this break point
+      background-color: transparent;
+      border: none;
+    }
+
+    &-heading {
+      font-size: sizes(xl);
+
+      // lg is 1000px
+      @include response(lg) {
+        // this is the code block that will be applied at this break point
+        font-size: sizes(md);
+      }
+      // sm is 560px
+      @include response(sm) {
+        // this is the code block that will be applied at this break point
+        display: none;
+      }
+    }
+    &-price {
+      font-size: sizes(lg);
+      font-weight: 300;
+      margin-block: 1rem;
+      margin-inline: 0;
+
+      // lg is 1000px
+      @include response(lg) {
+        // this is the code block that will be applied at this break point
+        font-size: sizes(sm);
+      }
+
+      // sm is 560px
+      @include response(sm) {
+        // this is the code block that will be applied at this break point
+        display: none;
+      }
+
+      strong {
+        font-weight: 600;
+      }
+    }
+    &-btn {
+      font-size: sizes(xs);
+      text-decoration: none;
+      color: color(quaternary);
+      // converting link elements to block to easy application of box model
+      display: block;
+      padding-block: 0.5rem;
+      padding-inline: 1rem;
+      border: 0.1rem solid color(quaternary);
+      background-color: lighten(color(primary), 20%);
+
+      // lg is 1000px
+      @include response(lg) {
+        // this is the code block that will be applied at this break point
+        padding-block: 0.2rem;
+        padding-inline: 0.5rem;
+      }
+
+      // sm is 560px
+      @include response(sm) {
+        // this is the code block that will be applied at this break point
+        padding-block: 0.5rem;
+        padding-inline: 0.7rem;
+        inline-size: 7rem;
+      }
+    }
+  }
+}
+
+.products-btn {
+  @include flexPosition;
+}
